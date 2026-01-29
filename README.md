@@ -30,6 +30,7 @@ Tech Stack
 Why
 
 - OnePay’s UI lacks filtering by several useful fields; this tool restores those capabilities and adds CSV export for analysis and bookkeeping, while keeping your data local.
+  
 Limitations
 
 - Optimized for OnePay statement formats; major template changes may require parser updates.
