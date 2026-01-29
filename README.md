@@ -5,6 +5,7 @@ Short Description
 Long Description
 
 - This project processes OnePay PDF statements entirely on your device to give you rich filtering and export capabilities that the native OnePay UI doesn’t provide. It uses robust text parsing and dynamic column detection to reliably extract transactions (including multi-line and cross-page descriptions), supports multi-file processing, and lets you export filtered results to CSV.
+  
 Key Features
 
 - Advanced filtering by date, account, transaction type, amount, and free-text description.
