@@ -181,6 +181,34 @@ th {
     font-weight: 600;
 }
 
+/* Sorting Styles */
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+th.sortable:hover {
+    background-color: #e5e7eb;
+}
+
+.sort-icon::after {
+    content: '↕';
+    opacity: 0.3;
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+th.sort-asc .sort-icon::after {
+    content: '↑';
+    opacity: 1;
+}
+
+th.sort-desc .sort-icon::after {
+    content: '↓';
+    opacity: 1;
+}
+
 tr:hover {
     background-color: #f9fafb;
 }
