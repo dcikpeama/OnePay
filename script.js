@@ -173,6 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         textContent.items.forEach(item => {
             const y = Math.round(item.transform[5]);
+            
+            // Filter out footer content (observed at y=34 and y=43 in statement_template.pdf)
+            if (y < 50) return;
+
             if (!lineMap.has(y)) lineMap.set(y, []);
             lineMap.get(y).push({
                 text: item.str,
