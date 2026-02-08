@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let allLines = []; // Raw lines for debugging/fallback
     let accounts = new Set();
     let currentAccount = 'Unknown';
+    
+    // Sorting State
+    let currentSort = {
+        column: null,
+        direction: 'asc' // or 'desc'
+    };
 
     // Drag & Drop Handlers
     dropZone.addEventListener('dragover', (e) => {
@@ -80,6 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     exportBtn.addEventListener('click', exportCSV);
+
+    // Sorting Event Listeners
+    document.querySelectorAll('th.sortable').forEach(th => {
+        th.addEventListener('click', () => {
+            const column = th.dataset.sort;
+            if (currentSort.column === column) {
+                // Toggle direction
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                // New column, default to asc
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+            renderResults();
+        });
+    });
 
     async function handleFiles(files) {
         // UI Updates
@@ -509,6 +531,50 @@ document.addEventListener('DOMContentLoaded', () => {
                    (t.account && t.account.toLowerCase().includes(lowerQuery));
         });
 
+        // Apply Sorting
+        if (currentSort.column) {
+            filtered.sort((a, b) => {
+                let valA, valB;
+
+                switch (currentSort.column) {
+                    case 'date':
+                        valA = parseDate(a.date);
+                        valB = parseDate(b.date);
+                        break;
+                    case 'amount':
+                        valA = a.amount;
+                        valB = b.amount;
+                        break;
+                    case 'account':
+                        valA = (a.account || '').toLowerCase();
+                        valB = (b.account || '').toLowerCase();
+                        break;
+                    case 'type':
+                        valA = (a.type || '').toLowerCase();
+                        valB = (b.type || '').toLowerCase();
+                        break;
+                    case 'description':
+                        valA = (a.description || '').toLowerCase();
+                        valB = (b.description || '').toLowerCase();
+                        break;
+                    default:
+                        return 0;
+                }
+
+                if (valA < valB) return currentSort.direction === 'asc' ? -1 : 1;
+                if (valA > valB) return currentSort.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // Update Sort Icons
+        document.querySelectorAll('th.sortable').forEach(th => {
+            th.classList.remove('sort-asc', 'sort-desc');
+            if (th.dataset.sort === currentSort.column) {
+                th.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+            }
+        });
+
         let filteredSummary = document.getElementById('filtered-summary');
         
         if (lowerQuery) {
@@ -587,6 +653,23 @@ document.addEventListener('DOMContentLoaded', () => {
             row.appendChild(cell);
             resultsBody.appendChild(row);
         }
+    }
+
+    function parseDate(dateStr) {
+        // Format: "Jan 22"
+        const parts = dateStr.trim().split(/\s+/);
+        if (parts.length < 2) return 0;
+        
+        const monthMap = {
+            'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
+            'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11
+        };
+        
+        const month = monthMap[parts[0].toLowerCase().slice(0, 3)] || 0;
+        const day = parseInt(parts[1], 10) || 0;
+        
+        // Return a comparable number: Month * 100 + Day (e.g., Jan 22 -> 22, Feb 1 -> 101)
+        return month * 100 + day;
     }
 
     function escapeHtml(text) {
