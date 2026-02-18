@@ -37,4 +37,4 @@
 
 - Optimized for OnePay statement formats; major template changes may require parser updates.
 - Heuristic parsing can occasionally need tuning for edge-case layouts.
-- Currently, while it is possible to import multiple years worth of statements all at once, the date column does not include the year since the parser doesn't append the year from the statement period section of the PDFs. As such, it is recommended to only export statments from the same year and edit the CSV to append the year. (I'll try my best to update the parsing script, but as a forewarning, this is the first project I've ever forked, so it will take some time for me to learn how the parser even works...)
+- Currently, while it is possible to import multiple years worth of statements all at once, the date column does not include the year since the parser doesn't append the year from the statement period section of the PDFs. As such, it is recommended to only export statments from the same year and edit the CSV to append the year.
