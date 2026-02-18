@@ -171,7 +171,7 @@ th, td {
 
 /* Column Widths */
 th:nth-child(1) { width: 120px; } /* Date - Fixed */
-th:nth-child(2) { width: 160px; } /* Account - Fixed */
+th:nth-child(2) { width: auto; } /* Account - Flexible to accomodate long account names */
 th:nth-child(3) { width: auto; }  /* Description - Flexible & Wrapping */
 th:nth-child(4) { width: 200px; } /* Transaction Type - Fixed */
 th:nth-child(5) { width: 150px; } /* Amount - Fixed */
