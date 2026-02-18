@@ -31,7 +31,7 @@
 ### Statement Compatibility
 
 - **Status:** This tool supports **all** formats from 2021 to present. The parser automatically detects the account type headers and adjusts accordingly.
-- **NOTE:** Due to the change in naming conventions for some of the default accounts over the last few years (Debit/Checking/Spend), if importing multiple years of statements, it is recommended to consolodate accounts with the same account number to one name for better sorting.
+- **NOTE:** Due to the change in naming conventions for some of the default accounts over the last few years (Debit/Checking/Spend), if importing statements from multiple years, it is recommended to consolodate accounts with the same account number to one name for better organization.
 
 ### Limitations
 
