@@ -31,10 +31,8 @@ Why
 
 - OnePay’s UI lacks filtering by several useful fields; this tool restores those capabilities and adds CSV export for analysis and bookkeeping, while keeping your data local.
 
-Statement Compatibility (2025 vs 2026)
+Statement Compatibility (2025 & 2026)
 
-- **2025 Statements:** Typically use "Debit" and "Savings" account headers.
-- **2026 Statements:** Introduce new account types like "Spend" and "OnePay Advance Overdraft".
 - **Status:** This tool supports **both** formats. The parser automatically detects the account type headers and adjusts accordingly.
 
 Limitations
